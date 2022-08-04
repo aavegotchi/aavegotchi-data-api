@@ -45,7 +45,7 @@ export const getSupplies = async (symbol: string) => {
         !prev ? next : prev.add(next)
     );
 
-    const circulationSupply = totalSupply.sub(incentivez);
+    const circulatingSupply = totalSupply.sub(incentivez);
 
     const burnedAmount = burnBalances.reduce((prev, next) =>
         !prev ? next : prev.add(next)
@@ -55,6 +55,6 @@ export const getSupplies = async (symbol: string) => {
         address: address,
         totalSupply: formatEther(totalSupply),
         burned: formatEther(burnedAmount),
-        circulationSupply: formatEther(circulationSupply.sub(burnedAmount)),
+        circulatingSupply: formatEther(circulatingSupply.sub(burnedAmount)),
     };
 };

@@ -60,7 +60,7 @@ export const getTotalSupply = (symbol: String) =>
 
                 let totalSupply = BigNumber.from(e.totalSupply.valueExact);
 
-                let circulationSupply = BigNumber.from(
+                let circulatingSupply = BigNumber.from(
                     e.totalSupply.valueExact
                 );
 
@@ -74,7 +74,7 @@ export const getTotalSupply = (symbol: String) =>
                         );
                     })
                     .forEach((b: any) => {
-                        circulationSupply = circulationSupply.sub(b.valueExact);
+                        circulatingSupply = circulatingSupply.sub(b.valueExact);
                         incentivez = incentivez.add(b.valueExact);
                     });
 
@@ -97,8 +97,8 @@ export const getTotalSupply = (symbol: String) =>
                     address: e.id,
                     totalSupply: formatEther(totalSupply),
                     burned: formatEther(burnedAmount),
-                    circulationSupply: formatEther(
-                        circulationSupply.sub(burnedAmount)
+                    circulatingSupply: formatEther(
+                        circulatingSupply.sub(burnedAmount)
                     ),
                 };
             })[0];
