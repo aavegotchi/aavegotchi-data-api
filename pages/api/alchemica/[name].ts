@@ -25,6 +25,9 @@ export default async function handler(
     }
 
     const data = await getSupplies(name.toUpperCase());
+    if (!data) {
+        return res.status(404).json({ error: "not found" });
+    }
     // const data = await getTotalSupply(name.toUpperCase());
     res.status(200).json({ name: name.toUpperCase(), ...data });
 }

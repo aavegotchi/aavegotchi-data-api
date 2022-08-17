@@ -11,13 +11,18 @@ const getContractAddress = (symbol: string) => {
             return "0x6a3e7c3c6ef65ee26975b12293ca1aad7e1daed2";
         case "fomo":
             return "0x44a6e0be76e1d9620a7f76588e4509fe4fa8e8c8";
-        default:
+        case "fud":
             return "0x403e967b044d4be25170310157cb1a4bf10bdd0f";
+        default:
+            return "0x0";
     }
 };
 
 export const getSupplies = async (symbol: string) => {
     const address = getContractAddress(symbol);
+    if (address === "0x0") {
+        return false;
+    }
     const contract = new Contract(address, ERC20, provider);
 
     const totalSupply = await contract.totalSupply();
@@ -36,7 +41,7 @@ export const getSupplies = async (symbol: string) => {
         "0x94cb5c277fcc64c274bd30847f0821077b231022",
         "0x7e07313b4ff259743c0c84ea3d5e741d2b0d07c3",
         "0xb208f8BB431f580CC4b216826AFfB128cd1431aB",
-        "0x1d0360bac7299c86ec8e99d0c1c9a95fefaf2a11"
+        "0x1d0360bac7299c86ec8e99d0c1c9a95fefaf2a11",
     ];
 
     const incentiveBalances = await Promise.all(
