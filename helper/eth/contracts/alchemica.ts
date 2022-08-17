@@ -13,6 +13,8 @@ const getContractAddress = (symbol: string) => {
             return "0x44a6e0be76e1d9620a7f76588e4509fe4fa8e8c8";
         case "fud":
             return "0x403e967b044d4be25170310157cb1a4bf10bdd0f";
+        case "gltr":
+            return "0x3801c3b3b5c98f88a9c9005966aa96aa440b9afc";
         default:
             return "0x0";
     }
@@ -42,6 +44,7 @@ export const getSupplies = async (symbol: string) => {
         "0x7e07313b4ff259743c0c84ea3d5e741d2b0d07c3",
         "0xb208f8BB431f580CC4b216826AFfB128cd1431aB",
         "0x1d0360bac7299c86ec8e99d0c1c9a95fefaf2a11",
+        "0x1fe64677ab1397e20a1211afae2758570fea1b8c",
     ];
 
     const incentiveBalances = await Promise.all(
