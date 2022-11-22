@@ -16,7 +16,7 @@ const getContractAddress = (symbol: string) => {
         case "gltr":
             return "0x3801c3b3b5c98f88a9c9005966aa96aa440b9afc";
         case "ghst":
-            return "0x3f382dbd960e3a9bbceae22651e88158d2791550";
+            return "0x385Eeac5cB85A38A9a07A70c73e0a3271CfB54A7";
         default:
             return "0x0";
     }
