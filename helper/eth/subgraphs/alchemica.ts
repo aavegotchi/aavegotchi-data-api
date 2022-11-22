@@ -9,7 +9,7 @@ export const alchemicaSubgraphClient = new ApolloClient({
 
 const burnAddress = [
     "0xffffffffffffffffffffffffffffffffffffffff",
-    "0x0000000000000000000000000000000000000000",
+    // "0x0000000000000000000000000000000000000000",
 ];
 
 const incentiveWallets = [
@@ -44,7 +44,9 @@ export const getTotalSupply = (symbol: String) =>
                 }
             `,
             variables: {
-                accounts: burnAddress.concat(incentiveWallets),
+                accounts: burnAddress.concat(
+                    incentiveWallets.map((e) => e.toLowerCase())
+                ),
                 symbol: symbol,
             },
         })
