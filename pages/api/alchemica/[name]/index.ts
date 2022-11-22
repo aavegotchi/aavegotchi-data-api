@@ -1,8 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSupplies } from "../../../../helper/eth/contracts/alchemica";
-import { getTotalSupply } from "../../../../helper/eth/subgraphs/alchemica";
-import { getContract } from "../../../../helper/graphql/alchemica";
 
 type Data = {
     name?: string;
