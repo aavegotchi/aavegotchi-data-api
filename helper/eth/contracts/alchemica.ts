@@ -47,6 +47,7 @@ export const getSupplies = async (symbol: string) => {
         "0xb208f8BB431f580CC4b216826AFfB128cd1431aB",
         "0x1d0360bac7299c86ec8e99d0c1c9a95fefaf2a11",
         "0x1fe64677ab1397e20a1211afae2758570fea1b8c",
+        "0xffe6280ae4e864d9af836b562359fd828ece8020",
     ];
 
     const incentiveBalances = await Promise.all(
