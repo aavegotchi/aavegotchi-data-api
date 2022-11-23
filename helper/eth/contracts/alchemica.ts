@@ -1,6 +1,6 @@
 import { Contract } from "ethers";
 import { formatEther } from "ethers/lib/utils";
-import { provider } from "../provider";
+import { mainnetProvider, provider } from "../provider";
 import ERC20 from "./abis/ERC20.json";
 
 const getContractAddress = (symbol: string) => {
@@ -16,7 +16,7 @@ const getContractAddress = (symbol: string) => {
         case "gltr":
             return "0x3801c3b3b5c98f88a9c9005966aa96aa440b9afc";
         case "ghst":
-            return "0x385Eeac5cB85A38A9a07A70c73e0a3271CfB54A7";
+            return "0x3f382dbd960e3a9bbceae22651e88158d2791550";
         default:
             return "0x0";
     }
@@ -27,8 +27,12 @@ export const getSupplies = async (symbol: string) => {
     if (address === "0x0") {
         return false;
     }
-    const contract = new Contract(address, ERC20, provider);
 
+    let prov = provider;
+    if (symbol == "GHST") {
+        prov = mainnetProvider;
+    }
+    const contract = new Contract(address, ERC20, prov);
     const totalSupply = await contract.totalSupply();
 
     const burnAddress = [
