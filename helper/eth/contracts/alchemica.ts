@@ -45,33 +45,32 @@ export const getSupplies = async (symbol: string) => {
     );
 
     const incentiveWallets = [
-        "0x3fb6c2a83d2fffe94e0b912b612fb100047cc176",
-        "0x94cb5c277fcc64c274bd30847f0821077b231022",
-        "0x7e07313b4ff259743c0c84ea3d5e741d2b0d07c3",
-        "0xb208f8BB431f580CC4b216826AFfB128cd1431aB",
-        "0x1d0360bac7299c86ec8e99d0c1c9a95fefaf2a11",
-        "0x1fe64677ab1397e20a1211afae2758570fea1b8c",
-        "0xffe6280ae4e864d9af836b562359fd828ece8020",
+        "0x3fb6c2a83d2fffe94e0b912b612fb100047cc176", // gameplayVesting / pre-mint
+        "0x94cb5c277fcc64c274bd30847f0821077b231022", // aavegotchi multisig
+        "0x7e07313b4ff259743c0c84ea3d5e741d2b0d07c3", // pre-mint
+        "0xb208f8BB431f580CC4b216826AFfB128cd1431aB", // dao
+        "0x1d0360bac7299c86ec8e99d0c1c9a95fefaf2a11", // gp
+        "0x1fe64677ab1397e20a1211afae2758570fea1b8c", // gltr staking
+        "0xffe6280ae4e864d9af836b562359fd828ece8020", // treasury
+        "0xcfd39603a5059f966ca490beb3002a7a57a63233", // pc
     ];
 
     const incentiveBalances = await Promise.all(
         incentiveWallets.map((e) => contract.balanceOf(e))
     );
 
-    const incentivez = incentiveBalances.reduce((prev, next) =>
+    const incentives = incentiveBalances.reduce((prev, next) =>
         !prev ? next : prev.add(next)
     );
 
-    const circulatingSupply = totalSupply.sub(incentivez);
-
-    const burnedAmount = burnBalances.reduce((prev, next) =>
+    const burned = burnBalances.reduce((prev, next) =>
         !prev ? next : prev.add(next)
     );
 
     return {
         address: address,
         totalSupply: formatEther(totalSupply),
-        burned: formatEther(burnedAmount),
-        circulatingSupply: formatEther(circulatingSupply.sub(burnedAmount)),
+        burned: formatEther(burned),
+        circulatingSupply: formatEther(totalSupply.sub(burned).sub(incentives)),
     };
 };
