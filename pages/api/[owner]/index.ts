@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSupplies } from "../../../helper/eth/contracts/alchemica";
+import { getGHSTSupply } from "../../../helper/eth/contracts/ghst";
 
 type Data = {
     name?: string;
@@ -22,7 +23,13 @@ export default async function handler(
             .json({ error: "Please provide Token name as string" });
     }
 
-    const data = await getSupplies(owner.toUpperCase());
+    let data = {};
+    if (owner.toLocaleLowerCase() == "ghst") {
+        data = await getGHSTSupply();
+    } else {
+        data = await getSupplies(owner.toUpperCase());
+    }
+
     if (!data) {
         return res.status(404).json({ error: "not found" });
     }
