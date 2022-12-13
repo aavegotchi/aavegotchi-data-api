@@ -3,13 +3,6 @@ import { formatEther } from "ethers/lib/utils";
 import { mainnetProvider, provider } from "../provider";
 import ERC20 from "./abis/ERC20.json";
 
-// Hot Wallets
-// => "from" = '\x0000000000000000000000000000000000000000'OR "from"='\x2c1a288353e136b9e4b467aadb307133fffeab25' OR "from"='\xc57Feb6d8d5EdfcCe4027C243DCEb2B51b0E318B' OR "from"='\xa0f32863AC0e82d36Df959A95FeDb661C1d32A6f')
-// emitted remove to great portal
-
-// Hot Wallets are not of the Circulating Supply
-// Same applies GP, PC Studios, DAO and BURN
-
 const getContractAddress = (network: string) => {
     switch (network.toLowerCase()) {
         case "mainnet":
@@ -70,8 +63,7 @@ export const getGHSTSupply = async () => {
         totalSupply: formatEther(mainnet.totalSupply),
         burned: formatEther(matic.burned.add(mainnet.burned)),
         circulatingSupply: formatEther(
-            mainnet.totalSupply
-                .sub(matic.burned.add(mainnet.burned))
+            mainnet.totalSupply.sub(matic.burned.add(mainnet.burned))
         ),
     };
 };
