@@ -67,11 +67,10 @@ export const getGHSTSupply = async () => {
     const matic = supplies[1];
 
     return {
-        totalSupply: formatEther(mainnet.totalSupply.add(matic.totalSupply)),
+        totalSupply: formatEther(mainnet.totalSupply),
         burned: formatEther(matic.burned.add(mainnet.burned)),
         circulatingSupply: formatEther(
             mainnet.totalSupply
-                .add(matic.totalSupply)
                 .sub(matic.burned.add(mainnet.burned))
         ),
     };
