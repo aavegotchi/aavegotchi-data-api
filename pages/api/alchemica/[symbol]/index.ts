@@ -19,7 +19,6 @@ export default async function handler(
     res: NextApiResponse<Data>
 ) {
     const { symbol }: Data = req.query;
-    console.log(symbol);
     if (typeof symbol != "string") {
         return res
             .status(400)
