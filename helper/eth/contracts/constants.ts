@@ -1,27 +1,16 @@
 import { Contract, ethers } from "ethers";
 import ERC20 from "./abis/ERC20.json";
 
-export const POLYGON_PROVIDER = new ethers.providers.JsonRpcProvider(
-    "https://polygon-rpc.com"
-);
-
-export const MAINNET_PROVIDER = new ethers.providers.JsonRpcProvider(
-    "https://mainnet.infura.io/v3/71e713fa8fa148c8b229b6e34a751005"
-);
-
-export enum EthNetwork {
-    "mainnet" = "mainnet",
-    "polygon" = "polygon",
-}
-
 export interface EthProvider {
     mainnet: ethers.providers.JsonRpcProvider;
     polygon: ethers.providers.JsonRpcProvider;
 }
 
 export const PROVIDERS: EthProvider = {
-    mainnet: MAINNET_PROVIDER,
-    polygon: POLYGON_PROVIDER,
+    mainnet: new ethers.providers.JsonRpcProvider(
+        "https://mainnet.infura.io/v3/71e713fa8fa148c8b229b6e34a751005"
+    ),
+    polygon: new ethers.providers.JsonRpcProvider("https://polygon-rpc.com"),
 };
 
 /**
@@ -35,8 +24,6 @@ export enum TokenSymbol {
     GLTR = "gltr",
     GHST = "ghst",
 }
-
-export const ALCHEMICA_SYMBOLS = [];
 
 interface AlchemicaContracts {
     kek: Contract;
@@ -73,27 +60,27 @@ export const ALCHEMICA_CONTRACTS: AlchemicaContracts = {
     kek: new Contract(
         "0x42e5e06ef5b90fe15f853f59299fc96259209c5c",
         ERC20,
-        POLYGON_PROVIDER
+        PROVIDERS.polygon
     ),
     alpha: new Contract(
         "0x6a3e7c3c6ef65ee26975b12293ca1aad7e1daed2",
         ERC20,
-        POLYGON_PROVIDER
+        PROVIDERS.polygon
     ),
     fomo: new Contract(
         "0x44a6e0be76e1d9620a7f76588e4509fe4fa8e8c8",
         ERC20,
-        POLYGON_PROVIDER
+        PROVIDERS.polygon
     ),
     fud: new Contract(
         "0x403e967b044d4be25170310157cb1a4bf10bdd0f",
         ERC20,
-        POLYGON_PROVIDER
+        PROVIDERS.polygon
     ),
     gltr: new Contract(
         "0x3801c3b3b5c98f88a9c9005966aa96aa440b9afc",
         ERC20,
-        POLYGON_PROVIDER
+        PROVIDERS.polygon
     ),
 };
 
@@ -101,12 +88,12 @@ export const GHST_CONTRACTS: GhstContracts = {
     mainnet: new Contract(
         "0x3f382dbd960e3a9bbceae22651e88158d2791550",
         ERC20,
-        MAINNET_PROVIDER
+        PROVIDERS.mainnet
     ),
     polygon: new Contract(
         "0x385eeac5cb85a38a9a07a70c73e0a3271cfb54a7",
         ERC20,
-        POLYGON_PROVIDER
+        PROVIDERS.polygon
     ),
 };
 
