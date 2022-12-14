@@ -78,11 +78,13 @@ export const getGHSTSupply = async () => {
         burned = burned.add(mainnet.burned).add(polygon.burned);
     }
 
-    const circulating = mainnet.totalSupply.sub(burned);
+    // totalSupply == circulating Supply
+    // need to readd subtracted burned amount
+    const totalSupply = mainnet.totalSupply.add(burned);
 
     return {
-        totalSupply: formatEther(mainnet.totalSupply),
+        totalSupply: formatEther(totalSupply),
         burned: formatEther(burned),
-        circulatingSupply: formatEther(circulating),
+        circulatingSupply: formatEther(totalSupply),
     };
 };
